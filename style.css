@@ -1,18 +1,48 @@
 body {
+    background-color: #FFF2D8;
     margin: 0;
 }
 
 .header {
-    background-color: gray;
-    display: flex;
-    align-items: center;
+    background-color: #BCA37F;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
     height: 100px;
 }
 
-
-h3 {
+.header h3 {
+    align-self: center;
     font-size: 2rem;
     margin: 0;
     margin-left: 2rem;
+}
+
+.header button {
+    background-color: #113946;
+    color: white;
+    align-self: center;
+    justify-self: flex-end;
+    border-radius: 20px;
+    height: fit-content;
+    margin-right: 2rem;
+    padding: .5rem 1.5rem;
+}
+
+.books {
+    border: 1px solid black;
+    box-sizing: border-box;
+    padding: 1rem;
+    width: fit-content;
+}
+
+.book-display {
+    background-color: #EAD7BB;
+    border: 1px solid black;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    text-align: center;
+    padding: 1rem;
 }
