@@ -32,12 +32,12 @@ function displayBook(book) {
     bookDisplay.classList.add('book-display');
 
     // Set text for title, author, pages, and read
-    bookTitle.textContent = book.title;
-    bookAuthor.textContent = book.author;
-    bookPages.textContent = book.pages;
-    bookRead.textContent = book.hasRead;
+    bookTitle.textContent = 'Title: ' + book.title;
+    bookAuthor.textContent = 'Author: ' + book.author;
+    bookPages.textContent = 'Page Amount: ' + book.pages;
+    bookRead.textContent = 'Has Read? ' + book.hasRead;
 
-    // Insert Elements into document
+    //Insert Elements into document
     bookDisplay.appendChild(bookTitle);
     bookDisplay.appendChild(bookAuthor);
     bookDisplay.appendChild(bookPages);
