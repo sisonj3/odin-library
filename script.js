@@ -3,6 +3,24 @@ let myLibrary = [];
 // Container that holds all book diplays
 const bookDisplays = document.querySelector('.books');
 
+// New Book Button
+const newBookBtn = document.querySelector('.new-book');
+newBookBtn.addEventListener('click', displayForm);
+
+// Add button
+const addBtn = document.querySelector('.add');
+addBtn.addEventListener('click', addBookToLibrary);
+
+// Form and overlay
+const form = document.querySelector('.form-display');
+const overlay = document.querySelector('.overlay');
+
+// Form Elements
+const bookTitle = document.querySelector('#title');
+const bookAuthor = document.querySelector('#author');
+const bookPages = document.querySelector('#pages');
+const bookRead = document.querySelector('#hasRead');
+
 // Book Constructor
 function Book (title, author, pages, hasRead) {
     this.title = title; // String
@@ -11,18 +29,34 @@ function Book (title, author, pages, hasRead) {
     this.hasRead = hasRead; // Boolean
 }
 
-function addBookToLibrary(book) {
-    console.log(Book.prototype.isPrototypeOf(book));
+function addBookToLibrary() {
+    form.classList.toggle('hidden');
+    overlay.classList.toggle('hidden');
 
-    if(Book.prototype.isPrototypeOf(book)){
-        myLibrary.push(book);
+    let book = new Book(bookTitle.value, bookAuthor.value, bookPages.value, bookRead.checked);
+
+    myLibrary.push(book);
+
+    console.log(myLibrary);
+    displayLibrary();
+}
+
+function displayLibrary() {
+
+    while (bookDisplays.firstChild){
+        bookDisplays.removeChild(bookDisplays.firstChild);
+    }
+
+    for (let i = 0; i < myLibrary.length; i++) {
+        displayBook(myLibrary[i], i)
     }
 }
 
-function displayBook(book) {
+function displayBook(book, index) {
     console.log(Book.prototype.isPrototypeOf(book));
 
     // Dom Elements for creating book display
+    let del = document.createElement('button');
     let bookDisplay = document.createElement('div');
     let bookTitle = document.createElement('div');
     let bookAuthor = document.createElement('div');
@@ -30,22 +64,46 @@ function displayBook(book) {
     let bookRead = document.createElement('div');
 
     bookDisplay.classList.add('book-display');
+    del.classList.add('delete');
+
+    del.textContent = 'Delete';
+
+    // Add index attribute to delete button
+    del.dataset.index = index;
+
+    // Add event listener to delete button
+    del.addEventListener('click', deleteBook);
 
     // Set text for title, author, pages, and read
     bookTitle.textContent = 'Title: ' + book.title;
     bookAuthor.textContent = 'Author: ' + book.author;
     bookPages.textContent = 'Page Amount: ' + book.pages;
-    bookRead.textContent = 'Has Read? ' + book.hasRead;
+
+    if(book.hasRead){
+        bookRead.textContent = 'Has Read? Yes';
+    } else {
+        bookRead.textContent = 'Has Read? No';
+    }
 
     //Insert Elements into document
     bookDisplay.appendChild(bookTitle);
     bookDisplay.appendChild(bookAuthor);
     bookDisplay.appendChild(bookPages);
     bookDisplay.appendChild(bookRead);
+    bookDisplay.appendChild(del);
     bookDisplays.appendChild(bookDisplay);
 
 }
 
-let potter = new Book('Harry Potter', 'J. K. Rowling', 1000, false);
+function displayForm(){
+    form.classList.toggle('hidden');
+    overlay.classList.toggle('hidden');
+}
 
-displayBook(potter);
+function deleteBook(e){
+    console.log(e.srcElement.dataset.index);
+}
+
+// let potter = new Book('Harry Potter', 'J. K. Rowling', 1000, false);
+
+// displayBook(potter);
