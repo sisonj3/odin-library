@@ -101,7 +101,11 @@ function displayForm(){
 }
 
 function deleteBook(e){
-    console.log(e.srcElement.dataset.index);
+    let index = e.srcElement.dataset.index;
+
+    myLibrary.splice(index, 1);
+
+    displayLibrary();
 }
 
 // let potter = new Book('Harry Potter', 'J. K. Rowling', 1000, false);
