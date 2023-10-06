@@ -117,3 +117,20 @@ body {
     width: fit-content;
     padding: .25rem .5rem; 
 }
+
+/* Has Read Button */
+.read {
+    background-color: lightgreen;
+    border-radius: 10px;
+    align-self: center;
+    width: fit-content;
+    padding: .25rem .5rem; 
+}
+
+.not-read {
+    background-color: lightcoral;
+    border-radius: 10px;
+    align-self: center;
+    width: fit-content;
+    padding: .25rem .5rem; 
+}
