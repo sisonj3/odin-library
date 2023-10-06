@@ -61,7 +61,7 @@ function displayBook(book, index) {
     let bookTitle = document.createElement('div');
     let bookAuthor = document.createElement('div');
     let bookPages = document.createElement('div');
-    let bookRead = document.createElement('div');
+    let bookRead = document.createElement('button');
 
     bookDisplay.classList.add('book-display');
     del.classList.add('delete');
@@ -74,16 +74,23 @@ function displayBook(book, index) {
     // Add event listener to delete button
     del.addEventListener('click', deleteBook);
 
+    // Add event listener to bookRead
+    bookRead.addEventListener('click', () => {
+        if(book.hasRead){
+            book.hasRead = false;
+        } else {
+            book.hasRead = true;
+        }
+
+        checkIfRead(book, bookRead);
+    });
+
     // Set text for title, author, pages, and read
     bookTitle.textContent = 'Title: ' + book.title;
     bookAuthor.textContent = 'Author: ' + book.author;
     bookPages.textContent = 'Page Amount: ' + book.pages;
 
-    if(book.hasRead){
-        bookRead.textContent = 'Has Read? Yes';
-    } else {
-        bookRead.textContent = 'Has Read? No';
-    }
+    checkIfRead(book, bookRead);
 
     //Insert Elements into document
     bookDisplay.appendChild(bookTitle);
@@ -106,6 +113,18 @@ function deleteBook(e){
     myLibrary.splice(index, 1);
 
     displayLibrary();
+}
+
+function checkIfRead(book, bookRead){
+    if(book.hasRead){
+        bookRead.textContent = 'Read!';
+        bookRead.classList.add('read');
+        bookRead.classList.remove('not-read');
+    } else {
+        bookRead.textContent = 'Not Read!';
+        bookRead.classList.add('not-read');
+        bookRead.classList.remove('read');
+    }
 }
 
 // let potter = new Book('Harry Potter', 'J. K. Rowling', 1000, false);
