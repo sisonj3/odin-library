@@ -9,7 +9,7 @@ newBookBtn.addEventListener('click', displayForm);
 
 // Add button
 const addBtn = document.querySelector('.add');
-addBtn.addEventListener('click', addBookToLibrary);
+addBtn.addEventListener('click', validateInfo);
 
 // Form and overlay
 const form = document.querySelector('.form-display');
@@ -27,6 +27,35 @@ function Book (title, author, pages, hasRead) {
     this.author = author; // String
     this.pages = pages; // Number
     this.hasRead = hasRead; // Boolean
+}
+
+function validateInfo(){
+
+    if (bookTitle.validity.valueMissing){
+        bookTitle.setCustomValidity("Need book title!");
+        bookTitle.reportValidity();
+    } else {
+        bookTitle.setCustomValidity("");
+    }
+
+    if(bookAuthor.validity.valueMissing){
+        bookAuthor.setCustomValidity('Need author name!');
+        bookAuthor.reportValidity();
+    } else {
+        bookAuthor.setCustomValidity('');
+    }
+
+    if(bookPages.validity.valueMissing){
+        bookPages.setCustomValidity('Need page amount!');
+        bookPages.reportValidity();
+    } else {
+        bookPages.setCustomValidity('');
+    }
+
+    if(bookTitle.checkValidity() && bookAuthor.checkValidity() && bookPages.checkValidity()){
+        addBookToLibrary();
+    }    
+
 }
 
 function addBookToLibrary() {
@@ -126,7 +155,3 @@ function checkIfRead(book, bookRead){
         bookRead.classList.remove('read');
     }
 }
-
-// let potter = new Book('Harry Potter', 'J. K. Rowling', 1000, false);
-
-// displayBook(potter);
